@@ -18,8 +18,10 @@ func main() {
 	// fmt.Println(hex.EncodeToString(h.Sum(nil)))
 	// fmt.Println("end")
 	alioss = &gosdk.Alioss{}
-	alioss.Init(gosdk.OSS_ACCESS_ID, gosdk.OSS_ACCESS_KEY)
-	alioss.Set_enable_domain_style(true)
+	if len(gosdk.OSS_ACCESS_ID) > 0 && len(gosdk.OSS_ACCESS_KEY) > 0 {
+		alioss.Init(gosdk.OSS_ACCESS_ID, gosdk.OSS_ACCESS_KEY)
+		alioss.Set_enable_domain_style(true)
+	}
 	// List_object()
 	// Upload_file_by_file()
 	// Create_object_dir()
