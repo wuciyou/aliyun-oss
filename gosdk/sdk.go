@@ -59,7 +59,7 @@ func (this *Alioss) Set_debug_mode(debug_mode bool) {
  * @author 898060380@qq.com
  * @param string hostname host name
  * @param string port string
- * @since 2012-06-11
+ * @since 2014-12-11
  * @return void
  */
 func (this *Alioss) Set_host_name(hostname string, port string) {
@@ -70,7 +70,7 @@ func (this *Alioss) Set_host_name(hostname string, port string) {
  * 设置vhost地址
  * @author 898060380@qq.com
  * @param string $vhost vhost
- * @since 2012-06-11
+ * @since 2014-12-11
  * @return void
  */
 func (this *Alioss) Set_vhost(vhost string) {
@@ -81,7 +81,7 @@ func (this *Alioss) Set_vhost(vhost string) {
  * 设置路径形式，如果为true,则启用三级域名，如bucket.oss.aliyuncs.com
  * @author 898060380@qq.com
  * @param boolean $enable_domain_style
- * @since 2012-06-11
+ * @since 2014-12-11
  * @return void
  */
 func (this *Alioss) Set_enable_domain_style(enable_domain_style bool) {
@@ -92,7 +92,7 @@ func (this *Alioss) Set_enable_domain_style(enable_domain_style bool) {
  * 设置请求主体，
  * @author 898060380@qq.com
  * @param interface{} data
- * @since 2012-06-11
+ * @since 2014-12-11
  * @return void
  */
 func (this *Alioss) set_body(data interface{}) {
@@ -103,7 +103,7 @@ func (this *Alioss) set_body(data interface{}) {
  * 通过文件名加载文件资源上传
  * @author 898060380@qq.com
  * @param string filename
- * @since 2012-06-11
+ * @since 2014-12-11
  * @return void
  */
 func (this *Alioss) upload_by_filename(filepath string) os.FileInfo {
@@ -127,7 +127,7 @@ func (this *Alioss) upload_by_filename(filepath string) os.FileInfo {
  * @param array $options (Required)
  * @throws OSS_Exception
  * @author 898060380@qq.com
- * @since 2012-05-31
+ * @since 2014-12-11
  */
 func (this *Alioss) auth(options map[string]string, h Header) {
 	// msg := "---LOG START---------------------------------------------------------------------------\n"
@@ -311,7 +311,7 @@ func (this *Alioss) List_object(bucket string, options map[string]string) {
  * @param string $file (Required)
  * @param array $options (Optional)
  * @author 898060380@qq.com
- * @since 2012-02-28
+ * @since 2014-12-11
  * @return ResponseCore
  */
 func (this *Alioss) Upload_file_by_file(bucket, object, file_path string) {
@@ -355,7 +355,7 @@ func (this *Alioss) Upload_file_by_file(bucket, object, file_path string) {
  * @param string $object
  * @param array $options
  * @author 898060380@qq.com
- * @since 2011-11-14
+ * @since 2014-12-11
  * @return ResponseCore
  */
 func (this *Alioss) Create_object_dir(bucket string, object string) {
