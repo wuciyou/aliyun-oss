@@ -46,7 +46,7 @@ func (this *Alioss) Init(access_id, access_key string) {
 /**
  * 设置debug模式
  * @param boolean $debug_mode (Optional)
- * @author xiaobing.meng@alibaba-inc.com
+ * @author 898060380@qq.com
  * @since 2014-12-20
  * @return void
  */
@@ -56,7 +56,7 @@ func (this *Alioss) Set_debug_mode(debug_mode bool) {
 
 /**
  * 设置host地址
- * @author xiaobing.meng@alibaba-inc.com
+ * @author 898060380@qq.com
  * @param string hostname host name
  * @param string port string
  * @since 2012-06-11
@@ -68,7 +68,7 @@ func (this *Alioss) Set_host_name(hostname string, port string) {
 
 /**
  * 设置vhost地址
- * @author xiaobing.meng@alibaba-inc.com
+ * @author 898060380@qq.com
  * @param string $vhost vhost
  * @since 2012-06-11
  * @return void
@@ -79,7 +79,7 @@ func (this *Alioss) Set_vhost(vhost string) {
 
 /**
  * 设置路径形式，如果为true,则启用三级域名，如bucket.oss.aliyuncs.com
- * @author xiaobing.meng@alibaba-inc.com
+ * @author 898060380@qq.com
  * @param boolean $enable_domain_style
  * @since 2012-06-11
  * @return void
@@ -90,7 +90,7 @@ func (this *Alioss) Set_enable_domain_style(enable_domain_style bool) {
 
 /**
  * 设置请求主体，
- * @author xiaobing.meng@alibaba-inc.com
+ * @author 898060380@qq.com
  * @param interface{} data
  * @since 2012-06-11
  * @return void
@@ -101,7 +101,7 @@ func (this *Alioss) set_body(data interface{}) {
 
 /**
  * 通过文件名加载文件资源上传
- * @author xiaobing.meng@alibaba-inc.com
+ * @author 898060380@qq.com
  * @param string filename
  * @since 2012-06-11
  * @return void
@@ -126,7 +126,7 @@ func (this *Alioss) upload_by_filename(filepath string) os.FileInfo {
  * Authorization
  * @param array $options (Required)
  * @throws OSS_Exception
- * @author xiaobing.meng@alibaba-inc.com
+ * @author 898060380@qq.com
  * @since 2012-05-31
  */
 func (this *Alioss) auth(options map[string]string, h Header) {
@@ -219,8 +219,8 @@ func (this *Alioss) sige(access, key string) string {
  * 记录日志
  * @param string $msg (Required)
  * @throws OSS_Exception
- * @author xiaobing.meng@alibaba-inc.com
- * @since 2011-12-27
+ * @author 898060380@qq.com
+ * @since 2014-12-20
  * @return void
  */
 func (this *Alioss) log(msg string) {
@@ -232,8 +232,8 @@ func (this *Alioss) log(msg string) {
  * @param  string $name (Required)
  * @param  string $errMsg (Required)
  * @throws OSS_Exception
- * @author xiaobing.meng@alibaba-inc.com
- * @since 2011-12-27
+ * @author 898060380@qq.com
+ * @since 2014-12-20
  * @return void
  */
 func (this *Alioss) is_empty(name string, errMsg string) {
@@ -310,7 +310,7 @@ func (this *Alioss) List_object(bucket string, options map[string]string) {
  * @param string $object (Required)
  * @param string $file (Required)
  * @param array $options (Optional)
- * @author xiaobing.meng@alibaba-inc.com
+ * @author 898060380@qq.com
  * @since 2012-02-28
  * @return ResponseCore
  */
@@ -354,7 +354,7 @@ func (this *Alioss) Upload_file_by_file(bucket, object, file_path string) {
  * @param string $bucket
  * @param string $object
  * @param array $options
- * @author xiaobing.meng@alibaba-inc.com
+ * @author 898060380@qq.com
  * @since 2011-11-14
  * @return ResponseCore
  */
@@ -375,8 +375,8 @@ func (this *Alioss) Create_object_dir(bucket string, object string) {
  * 检验$options
  * @param array $options (Optional)
  * @throws OSS_Exception
- * @author xiaobing.meng@alibaba-inc.com
- * @since 2011-12-27
+ * @author 898060380@qq.com
+ * @since 2014-12-20
  * @return boolean
  */
 func (this *Alioss) validate_options(options map[string]string) error {
@@ -419,8 +419,8 @@ func (ms MapSorter) Swap(i, j int) {
 * 1. 规则长度必须在1-1023字节之间
 * 2. 使用UTF-8编码
 * @param string $object (Required)
-* @author xiaobing.meng@alibaba-inc.com
-* @since 2011-12-27
+* @author 898060380@qq.com
+* @since 2014-12-20
 * @return boolean
  */
 func (this *Alioss) validate_object(object string) bool {
