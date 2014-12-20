@@ -1,0 +1,11 @@
+{
+    "WorkingDir": "{GOPATH}/src/github.com/wuciyou/aliyun-oss/",
+    "SourceDir": [
+        "{GOPATH}/src/github.com/wuciyou/aliyun-oss",
+        "{GOPATH}/src/github.com/wuciyou/aliyun-oss/gosdk",
+        "{GOPATH}/src/github.com/wuciyou/aliyun-oss/gosdk/lang"
+    ],
+    "SourceExt": ".go",
+    "BuildCmd": "go build {GOPATH}/src/github.com/wuciyou/aliyun-oss/main.go",
+    "RunCmd": "{GOPATH}/src/github.com/wuciyou/aliyun-oss/main"
+}
