@@ -12,6 +12,8 @@ import (
 	"os"
 	"regexp"
 	// "sort"
+	"io/ioutil"
+	"net/http"
 	"time"
 )
 
@@ -39,6 +41,12 @@ func (this *Alioss) Init(access_id, access_key string) {
 	this.access_id = access_id
 	this.access_key = access_key
 	this.hostname = DEFAULT_OSS_HOST
+}
+
+func NewOss(access_id, access_key string) *Alioss {
+	a := &Alioss{}
+	a.Init(access_id, access_key)
+	return a
 }
 
 /*%******************************************************************************************************%*/
@@ -117,6 +125,30 @@ func (this *Alioss) upload_by_filename(filepath string) os.FileInfo {
 	this.body = fbody
 	defer f.Close()
 	return sta
+}
+
+/**
+ * 通过url加载文件资源上传
+ * @author 898060380@qq.com
+ * @param string filename
+ * @since 2014-12-11
+ * @return void
+ */
+func (this *Alioss) upload_by_url(url string) (int, error) {
+	// bodys, err := requestcore.Get(url).Bytes()
+	Response, err := requestcore.Get(url).Response()
+	if err != nil {
+		return 0, err
+	}
+	if Response.StatusCode != 200 {
+		return 0, errors.New("请求异常")
+	}
+	bodys, err := ioutil.ReadAll(Response.Body)
+	if err != nil {
+		return 0, err
+	}
+	this.body = bodys
+	return len(bodys), err
 }
 
 /*%******************************************************************************************************%*/
@@ -304,6 +336,26 @@ func (this *Alioss) List_object(bucket string, options map[string]string) {
 	fmt.Println(request.String())
 }
 
+func (this *Alioss) Upload_by_url(bucket, object, url string) (*http.Response, error) {
+	options := make(map[string]string)
+	h := make(Header)
+	options[OSS_METHOD] = OSS_HTTP_PUT
+	options[OSS_BUCKET] = bucket
+	if len(object) > 0 {
+		options[OSS_OBJECT] = object
+	} else {
+		options[OSS_OBJECT] = url
+	}
+	content, err := this.upload_by_url(url)
+	if err != nil {
+		return nil, err
+	}
+	h[OSS_CONTENT_LENGTH] = fmt.Sprintf("%s", content)
+	h[OSS_CACHE_CONTROL] = "3600"
+	this.auth(options, h)
+	return this.request.Response()
+}
+
 /**
  * 上传文件，适合比较大的文件
  * @param string $bucket (Required)
@@ -314,7 +366,7 @@ func (this *Alioss) List_object(bucket string, options map[string]string) {
  * @since 2014-12-11
  * @return ResponseCore
  */
-func (this *Alioss) Upload_file_by_file(bucket, object, file_path string) {
+func (this *Alioss) Upload_file_by_file(bucket, object, file_path string) *requestcore.BeegoHttpRequest {
 	options := make(map[string]string)
 	h := make(Header)
 	fileinfo := this.upload_by_filename(file_path)
@@ -326,27 +378,26 @@ func (this *Alioss) Upload_file_by_file(bucket, object, file_path string) {
 		options[OSS_OBJECT] = fileinfo.Name()
 	}
 	h[OSS_CONTENT_LENGTH] = fmt.Sprintf("%d", fileinfo.Size())
-
 	this.auth(options, h)
-	fmt.Println(this.request.String())
-	return
-	request := requestcore.NewBeegoRequest("http://33mimg.oss.aliyuncs.com/testupdates.jpg", "PUT")
-	request.Header("Content-Type", "application/octet-stream")
-	times := time.Now().Add(-(3600 * 8 * 1000000000))
-	datestr := times.Format("Mon, 02 Jan 2006 15:04:05 GMT")
-	request.Header("Date", datestr)
-	request.Header("Host", "33mimg.oss.aliyuncs.com")
-	sige := this.sige("PUT\n\napplication/octet-stream\n"+datestr+"\n/33mimg/testupdates.jpg", "")
-	request.Header("Authorization", "OSS Ofn5oRuOVFgRfTpH:"+sige)
-	f, _ := os.Open("/Users/ayou/www/new.msc50.cn/notes/guanggun11/guanggun.png")
-	fsta, _ := f.Stat()
-	request.Header("content-length", fmt.Sprintf("%d", fsta.Size()))
-	filedate := make([]byte, 3942909)
-	f.Read(filedate)
-	request.Body(filedate)
-	response, _ := request.Response()
+	return this.request
+	// return
+	// request := requestcore.NewBeegoRequest("http://33mimg.oss.aliyuncs.com/testupdates.jpg", "PUT")
+	// request.Header("Content-Type", "application/octet-stream")
+	// times := time.Now().Add(-(3600 * 8 * 1000000000))
+	// datestr := times.Format("Mon, 02 Jan 2006 15:04:05 GMT")
+	// request.Header("Date", datestr)
+	// request.Header("Host", "33mimg.oss.aliyuncs.com")
+	// sige := this.sige("PUT\n\napplication/octet-stream\n"+datestr+"\n/33mimg/testupdates.jpg", "")
+	// request.Header("Authorization", "OSS Ofn5oRuOVFgRfTpH:"+sige)
+	// f, _ := os.Open("/Users/ayou/www/new.msc50.cn/notes/guanggun11/guanggun.png")
+	// fsta, _ := f.Stat()
+	// request.Header("content-length", fmt.Sprintf("%d", fsta.Size()))
+	// filedate := make([]byte, 3942909)
+	// f.Read(filedate)
+	// request.Body(filedate)
+	// response, _ := request.Response()
 
-	fmt.Println(response.Header)
+	// fmt.Println(response.Header)
 }
 
 /**
